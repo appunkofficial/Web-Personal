@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appunk Official</title>
+    <header>
+        
+    </header>
+    <style>
+        :root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --primary-gradient: linear-gradient(135deg, rgba(4, 61, 140, 0.9), rgba(0, 132, 255, 0.9));
+    --accent-color: #134f8a;
+    --shadow-layer-1: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --shadow-layer-2: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+body {
+    padding-top: 10px;
+    background: #00173a;
+    min-height: 500vh;
+    background-color: rgb(233, 233, 233);
+    
+    
+}
+
+/* Premium Navigation System */
+.premium-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--primary-gradient);
+    backdrop-filter: blur(15px);
+    padding: 1.2rem 0;
+    box-shadow: var(--shadow-layer-1), var(--shadow-layer-2);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.nav-item {
+    position: relative;
+    perspective: 1000px;
+    will-change: transform;
+    margin: 10px;
+    height: 50px;
+    width: 300px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.1) 50%, 
+        transparent 100%);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-3px) rotateX(10deg);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+.nav-link:hover::before {
+    opacity: 1;
+    transform: translateX(100%);
+}
+
+/* 3D Dropdown System */
+.dropdown-container {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    perspective: 1000px;
+    opacity: 0%;
+    visibility: hidden;
+    background-color: none;
+    cursor: pointer;
+    
+    
+
+}
+
+.nav-item:hover .dropdown-container {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(8px) rotateX(0);
+   
+}
+
+.dropdown-menu {
+    background: none;
+   
+    overflow: hidden;
+    transform-style: preserve-3d;
+    
+}
+
+.dropdown-item {
+    padding: 1.2rem;
+    color: #830000;
+    transition: all 0.5s ease;
+    position: relative;
+    
+}
+
+
+.dropdown-item:hover {
+    
+    transform: translateX(10px);
+   
+}
+
+/* Elite Sidebar System */
+.elite-sidebar {
+    position: fixed;
+    left: -500px;
+    top: 0;
+    height: 100vh;
+    width: 300px;
+    background: rgba(0, 21, 42, 0.98);
+    backdrop-filter: blur(15px);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1001;
+    border-right: 1px solid rgba(0, 89, 214, 0.15);
+    will-change: transform;
+}
+
+.elite-sidebar.active {
+    left: 0;
+}
+
+.sidebar-nav {
+    padding: 6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    
+}
+
+.sidebar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
+    transform: translateX(-120%);
+    opacity: 0;
+    transition: all 0.6s ease;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(5px);
+}
+
+.sidebar-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.elite-sidebar.active .sidebar-link {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.sidebar-link:hover {
+    transform: translateX(20px);
+}
+
+.sidebar-link:hover::before {
+    left: 100%;
+}
+
+/* Staggered Animation */
+.sidebar-link:nth-child(1) { transition-delay: 0.1s; }
+.sidebar-link:nth-child(2) { transition-delay: 0.2s; }
+.sidebar-link:nth-child(3) { transition-delay: 0.3s; }
+.sidebar-link:nth-child(4) { transition-delay: 0.4s; }
+.sidebar-link:nth-child(5) { transition-delay: 0.5s; }
+
+/* Hamburger Animation System */
+.hamburger {
+    position: fixed;
+    left: 2rem;
+    top: 2rem;
+    cursor: pointer;
+    z-index: 1002;
+    transition: all 0.4s ease;
+}
+
+.hamburger span {
+    display: block;
+    width: 35px;
+    height: 3px;
+    background: #fff;
+    margin: 8px 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: center;
+}
+
+.hamburger.active span:first-child {
+    transform: rotate(45deg) translate(8px, 8px);
+    background: #fff;
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.hamburger.active span:last-child {
+    transform: rotate(-45deg) translate(8px, -8px);
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .nav-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        padding: 0.8rem 1rem;
+    }
+}
+
+/* Tambahkan CSS ini di bagian style */
+.profile-logo {
+position: fixed;
+right: 20px;
+top: 15px;
+z-index: 1001;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.profile-logo img {
+width: 70px;
+height: 70px;
+border-radius: 50%;
+border: 3px solid rgb(0, 25, 53);
+box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+position: top;
+}
+
+.profile-logo:hover {
+transform: scale(1.1);
+}
+
+
+/* Tambahkan CSS ini */
+.settings-menu {
+position: absolute;
+right: 0;
+top: 60px;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(15px);
+border-radius: 12px;
+padding: 1rem;
+min-width: 200px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+opacity: 0;
+visibility: hidden;
+transform: perspective(1000px) rotateX(-45deg) translateY(20px);
+transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+transform-origin: top right;
+}
+
+.settings-menu.active {
+opacity: 1;
+visibility: visible;
+transform: perspective(1000px) rotateX(0) translateY(0);
+}
+
+.menu-item {
+padding: 12px 16px;
+margin: 4px 0;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+transform: translateZ(0);
+position: relative;
+perspective: 1000px;
+}
+
+.menu-item:hover {
+background: rgba(0, 114, 235, 0.1);
+transform: translateZ(10px) rotateX(5deg);
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Animasi masuk bertahap */
+.menu-item:nth-child(1) { transition-delay: 0.1s; }
+.menu-item:nth-child(2) { transition-delay: 0.2s; }
+.menu-item:nth-child(3) { transition-delay: 0.3s; }
+.menu-item:nth-child(4) { transition-delay: 0.4s; }
+
+@keyframes itemPop {
+0% {
+transform: translateZ(-50px) rotateX(45deg);
+opacity: 0;
+}
+100% {
+transform: translateZ(0) rotateX(0);
+opacity: 1;
+}
+}/* Tambahkan CSS ini */
+.settings-menu {
+position: absolute;
+right: 0;
+top: 60px;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(15px);
+border-radius: 12px;
+padding: 1rem;
+min-width: 200px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+opacity: 0;
+visibility: hidden;
+transform: perspective(1000px) rotateX(-45deg) translateY(20px);
+transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+transform-origin: top right;
+}
+
+.settings-menu.active {
+opacity: 1;
+visibility: visible;
+transform: perspective(1000px) rotateX(0) translateY(0);
+}
+
+.menu-item {
+padding: 12px 16px;
+margin: 4px 0;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+transform: translateZ(0);
+position: relative;
+perspective: 1000px;
+}
+
+.menu-item:hover {
+background: rgba(0, 114, 235, 0.1);
+transform: translateZ(10px) rotateX(5deg);
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Animasi masuk bertahap */
+.menu-item:nth-child(1) { transition-delay: 0.1s; }
+.menu-item:nth-child(2) { transition-delay: 0.2s; }
+.menu-item:nth-child(3) { transition-delay: 0.3s; }
+.menu-item:nth-child(4) { transition-delay: 0.4s; }
+
+@keyframes itemPop {
+0% {
+transform: translateZ(-50px) rotateX(45deg);
+opacity: 0;
+}
+100% {
+transform: translateZ(0) rotateX(0);
+opacity: 1;
+}
+}
+
+
+/* CSS untuk Dashboard */
+.dashboard-container {
+display: flex;
+margin-top: 80px; /* Sesuaikan dengan tinggi header */
+}
+
+.left-dashboard, .right-dashboard {
+width: 250px;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+padding: 20px;
+height: calc(100vh - 80px);
+position: fixed;
+box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+.left-dashboard {
+left: 0;
+border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.right-dashboard {
+right: 0;
+border-left: 1px solid rgba(0,0,0,0.1);
+}
+
+.main-content {
+flex: 1;
+margin: 0 260px; /* Sesuaikan dengan lebar dashboard */
+padding: 20px;
+background: white;
+min-height: 100vh;
+}
+
+.dashboard-nav {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.dashboard-item {
+padding: 12px 16px;
+border-radius: 8px;
+color: #2c3e50;
+text-decoration: none;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+transform: translateZ(0);
+position: relative;
+}
+
+.dashboard-item:hover {
+background: rgba(0, 114, 235, 0.1);
+transform: translateX(5px) scale(1.05);
+box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.dashboard-item::before {
+content: '';
+position: absolute;
+left: -10px;
+top: 0;
+height: 100%;
+width: 3px;
+background: #0072eb;
+opacity: 0;
+transition: all 0.3s ease;
+}
+
+.dashboard-item:hover::before {
+opacity: 1;
+left: 0;
+}
+
+@media (max-width: 1200px) {
+.left-dashboard, .right-dashboard {
+width: 200px;
+}
+
+.main-content {
+margin: 0 210px;
+}
+}
+
+
+/* CSS untuk Footer */
+.main-footer {
+background: linear-gradient(135deg, #2b5876, #4e4376);
+color: white;
+padding: 40px 20px;
+margin-top: 40px;
+border-radius: 20px 20px 0 0;
+box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
+}
+
+.footer-content {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 30px;
+}
+
+.footer-section {
+padding: 20px;
+border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-section:last-child {
+border-right: none;
+}
+
+.footer-section h3 {
+color: #fff;
+margin-bottom: 15px;
+font-size: 1.2em;
+}
+
+.footer-section p,
+.footer-section a {
+color: rgba(255,255,255,0.8);
+text-decoration: none;
+line-height: 1.6;
+}
+
+.footer-section a:hover {
+color: #fff;
+text-decoration: underline;
+}
+
+.footer-bottom {
+text-align: center;
+padding: 20px;
+margin-top: 40px;
+border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+.footer-content {
+grid-template-columns: 1fr;
+}
+
+.footer-section {
+border-right: none;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+padding-bottom: 30px;
+}
+
+.footer-section:last-child {
+border-bottom: none;
+}
+}:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --primary-gradient: linear-gradient(135deg, rgba(4, 61, 140, 0.9), rgba(0, 132, 255, 0.9));
+    --accent-color: #134f8a;
+    --shadow-layer-1: 0 4px 30px rgba(0, 0, 0, 0.1);
+    --shadow-layer-2: 0 8px 40px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+body {
+    padding-top: 10px;
+    background: #00173a;
+    min-height: 500vh;
+    background-color: rgb(233, 233, 233);
+    
+    
+}
+
+/* Premium Navigation System */
+.premium-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--primary-gradient);
+    backdrop-filter: blur(15px);
+    padding: 1.2rem 0;
+    box-shadow: var(--shadow-layer-1), var(--shadow-layer-2);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 2rem;
+}
+
+.nav-item {
+    position: relative;
+    perspective: 1000px;
+    will-change: transform;
+    margin: 10px;
+    height: 50px;
+    width: 300px;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    background: var(--glass-bg);
+    backdrop-filter: blur(5px);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, 
+        transparent 0%, 
+        rgba(255,255,255,0.1) 50%, 
+        transparent 100%);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-3px) rotateX(10deg);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+}
+
+.nav-link:hover::before {
+    opacity: 1;
+    transform: translateX(100%);
+}
+
+/* 3D Dropdown System */
+.dropdown-container {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    perspective: 1000px;
+    opacity: 0%;
+    visibility: hidden;
+    background-color: none;
+    cursor: pointer;
+    
+    
+
+}
+
+.nav-item:hover .dropdown-container {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(8px) rotateX(0);
+   
+}
+
+.dropdown-menu {
+    background: none;
+   
+    overflow: hidden;
+    transform-style: preserve-3d;
+    
+}
+
+.dropdown-item {
+    padding: 1.2rem;
+    color: #830000;
+    transition: all 0.5s ease;
+    position: relative;
+    
+}
+
+
+.dropdown-item:hover {
+    
+    transform: translateX(10px);
+   
+}
+
+/* Elite Sidebar System */
+.elite-sidebar {
+    position: fixed;
+    left: -500px;
+    top: 0;
+    height: 100vh;
+    width: 300px;
+    background: rgba(0, 21, 42, 0.98);
+    backdrop-filter: blur(15px);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1001;
+    border-right: 1px solid rgba(0, 89, 214, 0.15);
+    will-change: transform;
+}
+
+.elite-sidebar.active {
+    left: 0;
+}
+
+.sidebar-nav {
+    padding: 6rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    
+}
+
+.sidebar-link {
+    color: #fff;
+    text-decoration: none;
+    padding: 1.2rem 2rem;
+    border-radius: 12px;
+    transform: translateX(-120%);
+    opacity: 0;
+    transition: all 0.6s ease;
+    position: relative;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(5px);
+}
+
+.sidebar-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255,255,255,0.15),
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.elite-sidebar.active .sidebar-link {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.sidebar-link:hover {
+    transform: translateX(20px);
+}
+
+.sidebar-link:hover::before {
+    left: 100%;
+}
+
+/* Staggered Animation */
+.sidebar-link:nth-child(1) { transition-delay: 0.1s; }
+.sidebar-link:nth-child(2) { transition-delay: 0.2s; }
+.sidebar-link:nth-child(3) { transition-delay: 0.3s; }
+.sidebar-link:nth-child(4) { transition-delay: 0.4s; }
+.sidebar-link:nth-child(5) { transition-delay: 0.5s; }
+
+/* Hamburger Animation System */
+.hamburger {
+    position: fixed;
+    left: 2rem;
+    top: 2rem;
+    cursor: pointer;
+    z-index: 1002;
+    transition: all 0.4s ease;
+}
+
+.hamburger span {
+    display: block;
+    width: 35px;
+    height: 3px;
+    background: #fff;
+    margin: 8px 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-origin: center;
+}
+
+.hamburger.active span:first-child {
+    transform: rotate(45deg) translate(8px, 8px);
+    background: #fff;
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.hamburger.active span:last-child {
+    transform: rotate(-45deg) translate(8px, -8px);
+    background: #fff;
+}
+
+@media (max-width: 768px) {
+    .nav-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        padding: 0.8rem 1rem;
+    }
+}
+
+/* Tambahkan CSS ini di bagian style */
+.profile-logo {
+position: fixed;
+right: 20px;
+top: 15px;
+z-index: 1001;
+cursor: pointer;
+transition: all 0.3s ease;
+}
+
+.profile-logo img {
+width: 70px;
+height: 70px;
+border-radius: 50%;
+border: 3px solid rgb(0, 25, 53);
+box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+position: top;
+}
+
+.profile-logo:hover {
+transform: scale(1.1);
+}
+
+
+/* Tambahkan CSS ini */
+.settings-menu {
+position: absolute;
+right: 0;
+top: 60px;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(15px);
+border-radius: 12px;
+padding: 1rem;
+min-width: 200px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+opacity: 0;
+visibility: hidden;
+transform: perspective(1000px) rotateX(-45deg) translateY(20px);
+transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+transform-origin: top right;
+}
+
+.settings-menu.active {
+opacity: 1;
+visibility: visible;
+transform: perspective(1000px) rotateX(0) translateY(0);
+}
+
+.menu-item {
+padding: 12px 16px;
+margin: 4px 0;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+transform: translateZ(0);
+position: relative;
+perspective: 1000px;
+}
+
+.menu-item:hover {
+background: rgba(0, 114, 235, 0.1);
+transform: translateZ(10px) rotateX(5deg);
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Animasi masuk bertahap */
+.menu-item:nth-child(1) { transition-delay: 0.1s; }
+.menu-item:nth-child(2) { transition-delay: 0.2s; }
+.menu-item:nth-child(3) { transition-delay: 0.3s; }
+.menu-item:nth-child(4) { transition-delay: 0.4s; }
+
+@keyframes itemPop {
+0% {
+transform: translateZ(-50px) rotateX(45deg);
+opacity: 0;
+}
+100% {
+transform: translateZ(0) rotateX(0);
+opacity: 1;
+}
+}/* Tambahkan CSS ini */
+.settings-menu {
+position: absolute;
+right: 0;
+top: 60px;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(15px);
+border-radius: 12px;
+padding: 1rem;
+min-width: 200px;
+box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+opacity: 0;
+visibility: hidden;
+transform: perspective(1000px) rotateX(-45deg) translateY(20px);
+transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+transform-origin: top right;
+}
+
+.settings-menu.active {
+opacity: 1;
+visibility: visible;
+transform: perspective(1000px) rotateX(0) translateY(0);
+}
+
+.menu-item {
+padding: 12px 16px;
+margin: 4px 0;
+border-radius: 8px;
+cursor: pointer;
+transition: all 0.3s ease;
+transform: translateZ(0);
+position: relative;
+perspective: 1000px;
+}
+
+.menu-item:hover {
+background: rgba(0, 114, 235, 0.1);
+transform: translateZ(10px) rotateX(5deg);
+box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* Animasi masuk bertahap */
+.menu-item:nth-child(1) { transition-delay: 0.1s; }
+.menu-item:nth-child(2) { transition-delay: 0.2s; }
+.menu-item:nth-child(3) { transition-delay: 0.3s; }
+.menu-item:nth-child(4) { transition-delay: 0.4s; }
+
+@keyframes itemPop {
+0% {
+transform: translateZ(-50px) rotateX(45deg);
+opacity: 0;
+}
+100% {
+transform: translateZ(0) rotateX(0);
+opacity: 1;
+}
+}
+
+
+/* CSS untuk Dashboard */
+.dashboard-container {
+display: flex;
+margin-top: 80px; /* Sesuaikan dengan tinggi header */
+}
+
+.left-dashboard, .right-dashboard {
+width: 250px;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(10px);
+padding: 20px;
+height: calc(100vh - 80px);
+position: fixed;
+box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+.left-dashboard {
+left: 0;
+border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.right-dashboard {
+right: 0;
+border-left: 1px solid rgba(0,0,0,0.1);
+}
+
+.main-content {
+flex: 1;
+margin: 0 260px; /* Sesuaikan dengan lebar dashboard */
+padding: 20px;
+background: white;
+min-height: 100vh;
+}
+
+.dashboard-nav {
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+.dashboard-item {
+padding: 12px 16px;
+border-radius: 8px;
+color: #2c3e50;
+text-decoration: none;
+transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+transform: translateZ(0);
+position: relative;
+}
+
+.dashboard-item:hover {
+background: rgba(0, 114, 235, 0.1);
+transform: translateX(5px) scale(1.05);
+box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.dashboard-item::before {
+content: '';
+position: absolute;
+left: -10px;
+top: 0;
+height: 100%;
+width: 3px;
+background: #0072eb;
+opacity: 0;
+transition: all 0.3s ease;
+}
+
+.dashboard-item:hover::before {
+opacity: 1;
+left: 0;
+}
+
+@media (max-width: 1200px) {
+.left-dashboard, .right-dashboard {
+width: 200px;
+}
+
+.main-content {
+margin: 0 210px;
+}
+}
+
+
+/* CSS untuk Footer */
+.main-footer {
+background: linear-gradient(135deg, #2b5876, #4e4376);
+color: white;
+padding: 40px 20px;
+margin-top: 40px;
+border-radius: 20px 20px 0 0;
+box-shadow: 0 -4px 30px rgba(0,0,0,0.1);
+}
+
+.footer-content {
+max-width: 1200px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 30px;
+}
+
+.footer-section {
+padding: 20px;
+border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-section:last-child {
+border-right: none;
+}
+
+.footer-section h3 {
+color: #fff;
+margin-bottom: 15px;
+font-size: 1.2em;
+}
+
+.footer-section p,
+.footer-section a {
+color: rgba(255,255,255,0.8);
+text-decoration: none;
+line-height: 1.6;
+}
+
+.footer-section a:hover {
+color: #fff;
+text-decoration: underline;
+}
+
+.footer-bottom {
+text-align: center;
+padding: 20px;
+margin-top: 40px;
+border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+.footer-content {
+grid-template-columns: 1fr;
+}
+
+.footer-section {
+border-right: none;
+border-bottom: 1px solid rgba(255,255,255,0.1);
+padding-bottom: 30px;
+}
+
+.footer-section:last-child {
+border-bottom: none;
+}
+}
+      
+
+    </style>
+</head>
+
+<body>
+    <!-- Tambahkan di dalam body setelah header -->
+<div class="dashboard-container">
+    <!-- Dashboard Kiri -->
+    <aside class="left-dashboard">
+        <nav class="dashboard-nav">
+            <a href="#home" class="dashboard-item">Beranda</a>
+            <a href="#profile" class="dashboard-item">Profil</a>
+            <a href="#messages" class="dashboard-item">Pesan</a>
+            <a href="#settings" class="dashboard-item">Pengaturan</a>
+            <a href="#stats" class="dashboard-item">Statistik</a>
+            <a href="#help" class="dashboard-item">Bantuan</a>
+            <a href="#logout" class="dashboard-item">Keluar</a>
+        </nav>
+    </aside>
+
+    <!-- Konten Utama -->
+    <main class="main-content">
+        <!-- Konten Anda di sini -->
+        <h1>Konten Utama</h1>
+        <p>Isi konten utama aplikasi...</p>
+    </main>
+
+    <!-- Dashboard Kanan -->
+    <aside class="right-dashboard">
+        <nav class="dashboard-nav">
+            <a href="#notif" class="dashboard-item">Notifikasi</a>
+            <a href="#calendar" class="dashboard-item">Kalender</a>
+            <a href="#tasks" class="dashboard-item">Tugas</a>
+            <a href="#reports" class="dashboard-item">Laporan</a>
+            <a href="#analytics" class="dashboard-item">Analitik</a>
+            <a href="#tools" class="dashboard-item">Alat</a>
+            <a href="#support" class="dashboard-item">Dukungan</a>
+        </nav>
+    </aside>
+</div>
+
+
+    <!-- Tambahkan di dalam body setelah profile-logo -->
+<div class="profile-logo">
+    <img src="Logo AppunK Official.png" alt="Profile">
+    <div class="settings-menu">
+        <div class="menu-item">Profil Saya</div>
+        <div class="menu-item">Pengaturan</div>
+        <div class="menu-item">Notifikasi</div>
+        <div class="menu-item">Keluar</div>
+    </div>
+</div>
+
+
+    <!-- Hamburger System -->
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <!-- Elite Sidebar -->
+    <nav class="elite-sidebar">
+        <div class="sidebar-nav">
+            <a href="#" class="sidebar-link">Premium Home</a>
+            <a href="#" class="sidebar-link">About</a>
+            <a href="#" class="sidebar-link">Services</a>
+            <a href="#" class="sidebar-link">Portfolio</a>
+            <a href="#" class="sidebar-link">Contact</a>
+        </div>
+    </nav>
+
+
+
+     <nav class="premium-nav">
+        <div class="nav-grid">
+
+
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">Home</a>
+               
+            </div>
+
+            <!-- Tambahkan 6 item lainnya -->
+            <div class="nav-item">
+                <a href="#" class="nav-link">About</a>
+                
+            </div>
+                <!-- Dropdown untuk About -->
+
+            <div class="nav-item">
+                <a href="#" class="nav-link">Services</a>
+                
+                </div>   
+
+                
+    <script>
+        // Advanced Event Handling
+        const hamburger = document.querySelector('.hamburger');
+        const sidebar = document.querySelector('.elite-sidebar');
+        
+        // Toggle Sidebar
+        const toggleNavigation = () => {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+        }
+
+        // Event Delegation
+        document.addEventListener('click', (e) => {
+            // Toggle Sidebar
+            if(e.target.closest('.hamburger')) {
+                toggleNavigation();
+            }
+            
+            // Close Sidebar
+            if(!e.target.closest('.elite-sidebar') && !e.target.closest('.hamburger')) {
+                hamburger.classList.remove('active');
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Touch Event Handling
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.touches[0].clientX;
+        }, false);
+
+        document.addEventListener('touchend', e => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const deltaX = touchEndX - touchStartX;
+
+            if(Math.abs(deltaX) > 50) {
+                if(deltaX > 0 && !sidebar.classList.contains('active')) {
+                    toggleNavigation();
+                } else if(deltaX < 0 && sidebar.classList.contains('active')) {
+                    toggleNavigation();
+                }
+            }
+        });
+
+        // Tambahkan script ini
+document.querySelector('.profile-logo').addEventListener('click', function(e) {
+    e.stopPropagation();
+    this.querySelector('.settings-menu').classList.toggle('active');
+});
+
+// Tutup menu saat klik di luar
+document.addEventListener('click', function(e) {
+    if(!e.target.closest('.profile-logo')) {
+        document.querySelector('.settings-menu').classList.remove('active');
+    }
+});
+
+// Mencegah penutupan saat klik menu
+document.querySelector('.settings-menu').addEventListener('click', function(e) {
+    e.stopPropagation();
+});
+
+    </script>
+
+
+</body>
+
+    </div>
+</footer>
+</html>
